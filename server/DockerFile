@@ -1,0 +1,15 @@
+FROM node:18
+
+WORKDIR /app
+
+# Install app dependencies
+
+COPY package*.json ./
+
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Envirenement variables
+ENV PORT=5000
