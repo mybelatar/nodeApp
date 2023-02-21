@@ -1,5 +1,5 @@
 services:
-  api:
+  server:
     build:
       dockerfile: Dockerfile
       context: ./server
@@ -7,8 +7,19 @@ services:
       - 5000:5000
     command: npm run dev
     volumes:
-      - /app/node_modules
-      - .:/app
+      - /app/server/node_modules
+      - ./server:/app/server
+
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    ports:
+      - 5173:5173
+    command: npm run dev
+    volumes:
+      - /app/client/node_modules
+      - ./client:/app/client
 
   mongodb:
     image: mongo:latest
